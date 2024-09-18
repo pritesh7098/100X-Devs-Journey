@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="posts"></div>
+  <h1>Hello</h1>
+  <script>
+    async function sendRequest() {
+      const res = await axios.get("http://localhost:3000/sum?a=10&b=2");
+    }
+
+    sendRequest();
+  </script>
+</body>
+
+</html>
