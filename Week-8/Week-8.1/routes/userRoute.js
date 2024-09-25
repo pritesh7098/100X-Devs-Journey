@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const userRouter = Router();
+const { userModel } = require("../db");
 
 userRouter.post("/signup", function (req, res) {
   res.json({
@@ -8,12 +9,6 @@ userRouter.post("/signup", function (req, res) {
 });
 
 userRouter.post("/signin", function (req, res) {
-  res.json({
-    message: "Signup succeeded",
-  });
-});
-
-userRouter.post("/purchase", function (req, res) {
   res.json({
     message: "Signup succeeded",
   });

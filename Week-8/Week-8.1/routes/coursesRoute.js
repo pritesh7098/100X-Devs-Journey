@@ -1,15 +1,16 @@
 const { Router } = require("express");
 const courseRouter = Router();
+const { courseModel, purchaseModel } = require("../db");
 
 courseRouter.post("/purchaseCourse", function (req, res) {
   res.json({
-    message: " fetch PurchasedCourse successfully",
+    message: "Purchasing Done Successfully",
   });
 });
 
-courseRouter.get("/seeAllCourses", function (req, res) {
+courseRouter.get("/preview", function (req, res) {
   res.json({
-    message: " see all courses",
+    message: "Preview Purchased Course Successfully",
   });
 });
 module.exports = {
