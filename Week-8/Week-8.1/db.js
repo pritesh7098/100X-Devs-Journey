@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId; 
-
-mongoose.connect("")
-
+const ObjectId = mongoose.Types.ObjectId;
 
 const userSchema = new Schema({
   email: { type: String, unique: true },
@@ -25,12 +22,12 @@ const courseSchema = new Schema({
   description: String,
   price: Number,
   imageUrl: String,
-  creatorId: ObjectId
+  creatorId: ObjectId,
 });
 
 const purchaseSchema = new Schema({
   userId: ObjectId,
-  courseId: ObjectId
+  courseId: ObjectId,
 });
 
 const userModel = mongoose.model("user", userSchema);
@@ -42,5 +39,5 @@ module.exports = {
   userModel,
   adminModel,
   courseModel,
-  purchaseModel
-}
+  purchaseModel,
+};
