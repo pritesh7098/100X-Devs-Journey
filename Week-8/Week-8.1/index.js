@@ -1,18 +1,30 @@
+require("dotenv").config();
+console.log(process.env.MONGO_URL);
+
 const express = require("express");
+const mongoose = require("mongoose");
 
 const { courseRouter } = require("./routes/coursesRoute");
 const { userRouter } = require("./routes/userRoute");
 const { adminRouter } = require("./routes/adminRoute");
 
+// main logic body
+
 const app = express();
+
+app.use(express.json()); // necessary to use this mw  as this routes requires the json data
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/admin", adminRouter);
 
-const port = 3000;
+async function main() {
+  await mongoose.connect(process.env.MONGO_URL);
+  app.listen(3000);
+  console.log("listening on port 3000");
+}
 
-app.listen(port);
+main();
 
 /* ********************************************************************************************************************************************************************* */
 
