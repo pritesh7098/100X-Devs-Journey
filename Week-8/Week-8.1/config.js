@@ -1,5 +1,5 @@
-const USER_JWT_KEY = "Pritesh70982001";
-const ADMIN_JWT_KEY = "PriteshAdmin70982001";
+const USER_JWT_KEY = process.env.USER_JWT_KEY;
+const ADMIN_JWT_KEY = process.env.ADMIN_JWT_KEY;
 
 module.exports = {
   USER_JWT_KEY,
