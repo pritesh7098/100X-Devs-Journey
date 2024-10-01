@@ -7763,3 +7763,15 @@ Week-8/Week-8.1/node_modules/undefsafe/package.json
 Week-8/Week-8.1/node_modules/undefsafe/README.md
 Week-8/Week-8.1/node_modules/undefsafe/.github/workflows/release.yml
 Week-8/Week-8.1/node_modules/undefsafe/lib/undefsafe.js
+Week-8/Week-8.1/node_modules/dotenv/CHANGELOG.md
+Week-8/Week-8.1/node_modules/dotenv/config.d.ts
+Week-8/Week-8.1/node_modules/dotenv/config.js
+Week-8/Week-8.1/node_modules/dotenv/LICENSE
+Week-8/Week-8.1/node_modules/dotenv/package.json
+Week-8/Week-8.1/node_modules/dotenv/README-es.md
+Week-8/Week-8.1/node_modules/dotenv/README.md
+Week-8/Week-8.1/node_modules/dotenv/lib/cli-options.js
+Week-8/Week-8.1/node_modules/dotenv/lib/env-options.js
+Week-8/Week-8.1/node_modules/dotenv/lib/main.d.ts
+Week-8/Week-8.1/node_modules/dotenv/lib/main.js
+Week-8/Week-8.1/.env
