@@ -34,7 +34,7 @@ adminRouter.post("/signin", function (req, res) {
   if (user) {
     const token = jwt.sign(
       {
-        id: user._id,
+        id: admin._id,
       },
       ADMIN_JWT_KEY
     );
@@ -49,7 +49,10 @@ adminRouter.post("/signin", function (req, res) {
   }
 });
 
-adminRouter.post("/postcourse", AdminMiddleware, async function (req, res) {
+
+// now this route will only be accessible by admin. for that we will use middleware to verify admin token.
+
+adminRouter.post("/course", AdminMiddleware, async function (req, res) {
   const adminId = req.userId; // here adminId is nothing but id which is verified in admin middleware
 
   // basically we have to craete a new course and add it to databse as an admin
@@ -74,21 +77,50 @@ adminRouter.post("/postcourse", AdminMiddleware, async function (req, res) {
   });
 });
 
-adminRouter.put("/update", async function (req, res) {
-  const { title, description, price, imageUrl } = req.body;
+// now this route basically updates the course details and it can only be update by a course creator.
 
-  const updateCourse = await courseModel.updateOne({});
+adminRouter.put("/course", AdminMiddleware, async function (req, res) {
+  const adminId = req.userId;
+
+  const { title, description, imageUrl, price, courseId } = req.body;
+
+  const course = await courseModel.updateOne(
+    {
+      _id: courseId,
+      creatorId: adminId,
+    },
+    {
+      title: title,
+      description: description,
+      imageUrl: imageUrl,
+      price: price,
+    }
+  );
 
   res.json({
-    message: " Course Updation successfully by Admin",
+    message: "Course updated",
+    courseId: course._id,
   });
 });
 
-adminRouter.delete("/getallcourses", function (req, res) {
-  res.json({
-    message: " Course Deletion successfully by Admin",
-  });
-});
+// now this route basically fetches the all the courses which creator has.
+
+adminRouter.get(
+  "/course/allcourses",
+  AdminMiddleware,
+  async function (req, res) {
+    const adminId = req.userId;
+
+    const courses = await courseModel.find({
+      creatorId: adminId,
+    });
+
+    res.json({
+      message: "The courses this creator has access to is successfully fetched",
+      courses: courses,
+    });
+  }
+);
 
 module.exports = {
   adminRouter: adminRouter,

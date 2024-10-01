@@ -1,15 +1,19 @@
 const express = require("express");
 const { Router } = require("express");
-const { userModel } = require("../db");
+const { userModel, purchaseModel, courseModel } = require("../db");
 const { jwt } = require("jsonwebtoken");
 const { USER_JWT_KEY } = require("../config");
+
+const { userMiddleware } = require("../middlewares/userMiddleware");
+
 const userRouter = Router();
 
 const app = express();
 app.use(express.json());
-userRouter.post("/signup", async function (req, res) {
-  console.log(req.body); // Log the request body
 
+// main user routes
+
+userRouter.post("/signup", async function (req, res) {
   const { email, password, firstName, lastName } = req.body; // u can use another way also but it it good and short
 
   // handling error when nofield is provided
@@ -67,6 +71,31 @@ userRouter.post("/signin", async function (req, res) {
       message: " Unauthorized user spotted bhag bc ",
     });
   }
+});
+
+// this endpoint responsible for preview the course which that indivisual user have purchased.
+
+userRouter.get("/mypurchase", userMiddleware, async function (req, res) {
+  const userId = req.userId;
+
+  const purchasedCourses = await purchaseModel.find({
+    userId: userId,
+  });
+
+  let purchasedCourseIds = [];
+
+  for (let i = 0; i < purchases.length; i++) {
+    purchasedCourseIds.push(purchases[i].courseId);
+  }
+
+  const coursesData = await courseModel.find({
+    _id: { $in: purchasedCourseIds },
+  });
+
+  res.json({
+    purchases,
+    coursesData,
+  });
 });
 
 module.exports = {
