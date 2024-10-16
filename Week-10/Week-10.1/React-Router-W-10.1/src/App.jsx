@@ -77,7 +77,7 @@ export default App;
 
 /* **************************************************************************************** */
 
-// useRef
+// useRef : UseRef Hook in React.
 
 // as we knoiw there are many ways to target the dom elements and perform operations on it here we firstly used a ugly way with manipulating dom bt this is n ot a great way to do it.
 
@@ -115,4 +115,3 @@ function App() {
 }
 
 export default App;
-
