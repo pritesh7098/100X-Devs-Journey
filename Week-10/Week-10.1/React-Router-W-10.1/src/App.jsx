@@ -79,11 +79,11 @@ export default App;
 
 // useRef : UseRef Hook in React.
 
-// as we knoiw there are many ways to target the dom elements and perform operations on it here we firstly used a ugly way with manipulating dom bt this is n ot a great way to do it.
+// as we know there are many ways to target the dom elements and perform operations on it here we firstly used a ugly way with manipulating dom bt this is not a great way to do it.
 
 // so great way to do is useRef as we use react so be modern and proffeional to handle use cases like this.
 
-import React, { useRef } from "react";
+/* import React, { useRef } from "react";
 
 function App() {
   // defining useRef hook here ...
@@ -97,19 +97,48 @@ function App() {
     alert("Please enter your name first ");
 
     /* document.getElementById("name").focus();
-    alert("Please enter your name first "); */
+    alert("Please enter your name first "); 
   }
 
   return (
     <div>
       <h2> Signup Form</h2>
       {/*       <input id="name" type="text" placeholder="Enter your name" />
-       */}
+       }
 
       <input ref={inputRef} type="text" placeholder="Enter your name" />
 
       <input type="password" placeholder="Enter your Password" />
       <button onClick={focusOnName}>Signup</button>
+    </div>
+  );
+}
+
+export default App; */
+
+// Second use case
+// UseRef - also it is a good raw middlware between the two like raw variable and the usestate.
+
+import React, { useState } from "react";
+
+function App() {
+  const [timer, setTimer] = useState(0);
+
+  function start() {
+    let final = setInterval(() => {
+      setTimer((prevTimer) => prevTimer + 1);
+    }, 1000);
+  }
+
+  function stop() {
+    clearInterval(final);
+  }
+
+  return (
+    <div>
+      {timer}
+      <button onClick={start}>Start Clock</button>
+      <button onClick={stop}>Stop Clock</button>
     </div>
   );
 }
