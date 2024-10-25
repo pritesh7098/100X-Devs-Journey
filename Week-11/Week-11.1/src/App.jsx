@@ -74,3 +74,14 @@ function App() {
 }
 
 export default App;
+
+// useRefetch - so when u practice to code this topic  just remember to be in many condition while dealing with useFetch hook
+// as interviewr might make any scenarios possible. 
+
+
+/* *************************************************************************************************************** */
+
+
+//usePrev hook 
+
+
