@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useFetch } from "./hooks/useFetch";
 
 // custom hooks for incrementing counter
@@ -17,7 +18,6 @@ import { useFetch } from "./hooks/useFetch";
   };
 }
  */
-
 // before custom hooks
 
 /* function App() {
@@ -67,21 +67,18 @@ export default App; */
 
 // useFetch hook
 
-function App() {
-  const { post } = useFetch("https://jsonplaceholder.typicode.com/todos/1");
+const ExampleComponent = () => {
+  const { data, loading, error } = useFetch("https://dummyjson.com/posts");
 
-  return <div>{post}</div>;
-}
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-export default App;
+  return (
+    <div>
+      <h1>Data from API</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};
 
-// useRefetch - so when u practice to code this topic  just remember to be in many condition while dealing with useFetch hook
-// as interviewr might make any scenarios possible. 
-
-
-/* *************************************************************************************************************** */
-
-
-//usePrev hook 
-
-
+export default ExampleComponent;
