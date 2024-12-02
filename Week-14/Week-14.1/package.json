@@ -1,0 +1,15 @@
+{
+  "name": "week-14.1",
+  "version": "1.0.0",
+  "description": "Week - 14 \r Week - 14.1 - Typescript Stuff.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.7.2"
+  }
+}
