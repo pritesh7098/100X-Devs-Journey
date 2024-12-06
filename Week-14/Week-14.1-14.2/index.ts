@@ -186,3 +186,10 @@ console.log(ceo.greet());
 
 // follow the note by dailycode.com
 
+/* ********************************************************************************************************* */
+
+// Break 
+
+// Arrays in TypeScript 
+
+
