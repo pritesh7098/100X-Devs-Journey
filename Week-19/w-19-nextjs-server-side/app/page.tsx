@@ -1,13 +1,27 @@
-"use client";
+import axios from "axios";
 
-import React from "react";
+export default async function getUserDetails() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/user")
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
 
-function home() {
+
+
   return (
+
+
     <div>
-      <h1>Welcome to the Home Page</h1>
+
+<h1>Homepage</h1>
+
+
     </div>
-  );
+  )
+
 }
 
-export default home;
+
+
