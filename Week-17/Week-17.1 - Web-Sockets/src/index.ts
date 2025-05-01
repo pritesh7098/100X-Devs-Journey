@@ -7,13 +7,19 @@ console.log("WebSocket server is running on ws://localhost:8080");
 
 wss.on("connection", function (socket) {
   console.log("user connectedd");
-  setInterval(() => {
-    socket.send("heyyy my roll no is : " + Math.random());
-  }, 500);
+  /*  setInterval(() => {
+     socket.send("heyyy my roll no is : " + Math.random());
+   }, 500);
+  */
 
-  // message from client to the server
+  // ping pong example
 
   socket.on("message", (e) => {
     console.log(e.toString());
+    console.log(e.toString() === "Hi Pritesh");
+
+    if (e.toString() === "Hi Pritesh") {
+      socket.send("Hi Cutie");
+    }
   });
-});
+}); // so when the client send "ping/any msg" , so server has to respond with "pong/any msg "
