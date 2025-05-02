@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const ws_1 = require("ws");
+const ws_1 = require("ws"); // here we have used ws library from npm to create our ws server bt there are other ways as well.
 const wss = new ws_1.WebSocketServer({ port: 8080 });
-console.log("WebSocket server is running on ws://localhost:8080");
-// message from server to the postman client
+console.log("WebSocket server is running on ws://localhost:8080"); // created ws on port 8080
+// message from server to the postman client ( on postman client the msg gets printed )
 wss.on("connection", function (socket) {
     console.log("user connectedd");
-    /*  setInterval(() => {
-       socket.send("heyyy my roll no is : " + Math.random());
-     }, 500);
-    */
+    /*   setInterval(() => {
+        socket.send("heyyy my roll no is : " + Math.random());
+      }, 1000); // every one second print my roll no as random.
+    }); */
     // ping pong example
     socket.on("message", (e) => {
         console.log(e.toString());
@@ -18,4 +18,4 @@ wss.on("connection", function (socket) {
             socket.send("Hi Cutie");
         }
     });
-}); // so when the client send "ping" , so server has to respond with "pong"
+}); // so when the client send "ping/any msg" , so server has to respond with "pong/any msg "
