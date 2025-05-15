@@ -7,7 +7,7 @@
 export default function App() {
   return (
     <div className="bg-blue-200 min-h-screen">
-      <h1 className=" flex items-center justify-center pt-10 font-bold font-  text-blue-700 ">
+      <h1 className="flex items-center justify-center pt-10 font-bold font-  text-blue-700 ">
         Webinar.gg
       </h1>
       <h2 className=" flex items-center justify-center text-red-500 font-bold pt-10 ">
