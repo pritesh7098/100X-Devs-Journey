@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 
-const myWebSocketSer = new WebSocketServer({ port: 8080 }); // created  a ws server
+const myWebSocketSer = new WebSocketServer({ port: 8000 }); // created  a ws server
 
 let userCount = 0;
 // global allSocket array for  => when a new socket/client is connected it gets push to this array and we have all the client track at one place.
@@ -27,15 +27,16 @@ myWebSocketSer.on("connection", (socket) => {
       socket.send(msg.toString() + " : sent from the  server ");
     }, 2000); */
 
-    // okk, now in above ex we have send response to the client as it is if we have to send response to all the client connectted to the same wss then we need to :
+    // okk, now in above ex we have send response to the client as it is, if we have to send response to all the client connectted to the same wss then we need to :
 
     for (let i = 0; i < allSocket.length; i++) {
       const s = allSocket[i];
       s.send(msg.toString() + " : sent from the  server ");
-    }
+    } 
   });
 });
 
 //   \|/
 
-// So my hopescotch is not working right now , next time when you sit for lec connect hopescotch and cross check the code like diff clients are connected to one server or not and the message is seen by both the clients at place, and after that just moove forward and try to code a client side code for the application. Timeline : 39.31 .
+//Timeline : 01.23 .
+
