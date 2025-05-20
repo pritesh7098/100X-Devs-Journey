@@ -1,42 +1,62 @@
-import { WebSocketServer } from "ws";
+// Things are going top of head so ,
+
+import { WebSocketServer, WebSocket } from "ws";
 
 const myWebSocketSer = new WebSocketServer({ port: 8000 }); // created  a ws server
 
-let userCount = 0;
-// global allSocket array for  => when a new socket/client is connected it gets push to this array and we have all the client track at one place.
-let allSocket: any = [];
+interface user {
+  socket: WebSocket;
+  room: string;
+}
+
+let allSockets: user[] = []; // created a global array for storing all clients/socket at one place only.
 
 myWebSocketSer.on("connection", (socket) => {
-  allSocket.push(socket);
+  console.log("Client connection is established successfully ");
 
-  userCount = userCount + 1;
-  console.log("User connected Succesufully #" + userCount);
-
-  // now we need a handler like when we reccivee a message from a client we will transfer it accordingly.
-  // also this is how server can reccive a message from a client.
-
+  // the msg we are sending from a client(postman) to server is caught over here
   socket.on("message", (msg) => {
-    console.log("message reccived : " + msg.toString());
+    try {
+      const parsedMessage = JSON.parse(msg as unknown as string); // parsing the JSON-string into an object.
+      // msg is reccived with room ID and push to the global array
+      if (parsedMessage.type == "join") {
+        console.log(
+          "user joined room successfully" + parsedMessage.payload.roomId
+        );
 
-    // so in this way when client send us a msg the server reccives it and prints it on a  console for my understanding.
+        allSockets.push({
+          socket,
+          room: parsedMessage.payload.roomId,
+        });
+      } else if (parsedMessage.type === "chat") {
+        console.log("User wants to chat .....");
 
-    /* ****************************** */
+        // now if the person wants to chat , we have to check from which room he belongs to
 
-    // now if we want to send some message from server to client we use socket.send in this case. -> in this we send the message that we have already reccived from a client.
-    /*  setTimeout(() => {
-      socket.send(msg.toString() + " : sent from the  server ");
-    }, 2000); */
+        let currentUserRoom = null;
 
-    // okk, now in above ex we have send response to the client as it is, if we have to send response to all the client connectted to the same wss then we need to :
+        for (let i = 0; i < allSockets.length; i++) {
+          if (allSockets[i].socket == socket) {
+            currentUserRoom = allSockets[i].room;
+          }
+        }
 
-    for (let i = 0; i < allSocket.length; i++) {
-      const s = allSocket[i];
-      s.send(msg.toString() + " : sent from the  server ");
-    } 
+        // so the sockets/clients which are connected to the particular room having a roomID let's send a message to all of them.
+
+        for (let i = 0; i < allSockets.length; i++) {
+          if (allSockets[i].room === currentUserRoom) {
+            allSockets[i].socket.send(parsedMessage.payload.message);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Failed to parse message", error);
+    }
+  });
+
+  socket.on("close", () => {
+    allSockets = allSockets.filter((user) => user.socket !== socket);
   });
 });
 
-//   \|/
-
-//Timeline : 01.23 .
 

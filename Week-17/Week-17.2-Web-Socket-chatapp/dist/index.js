@@ -1,30 +1,109 @@
 "use strict";
+/* // Things are going top of head so ,
+
+import { WebSocketServer, WebSocket } from "ws";
+
+const myWebSocketSer = new WebSocketServer({ port: 8000 }); // created  a ws server
+
+interface user {
+  socket: WebSocket;
+  room: string;
+}
+
+let allSockets: user[] = []; // created a global array for storing all clients/socket at one place only.
+
+myWebSocketSer.on("connection", (socket) => {
+  console.log("Client connection is established successfully ");
+
+  // the msg we are sending from a client(postman) to server is caught over here
+  socket.on("message", (msg) => {
+    try {
+      const parsedMessage = JSON.parse(msg as string); // parsing the JSON-string into an object.
+      // msg is reccived with room ID and push to the global array
+      if (parsedMessage.type == "join") {
+        console.log(
+          "user joined room successfully" + parsedMessage.payload.roomId
+        );
+
+        allSockets.push({
+          socket,
+          room: parsedMessage.payload.roomId,
+        });
+      } else if (parsedMessage.type === "chat") {
+        console.log("User wants to chat .....");
+
+        // now if the person wants to chat , we have to check from which room he belongs to
+
+        let currentUserRoom = null;
+
+        for (let i = 0; i < allSockets.length; i++) {
+          if (allSockets[i].socket == socket) {
+            currentUserRoom = allSockets[i].room;
+          }
+        }
+
+        // so the sockets/clients which are connected to the particular room having a roomID let's send a message to all of them.
+
+        for (let i = 0; i < allSockets.length; i++) {
+          if (allSockets[i].room === currentUserRoom) {
+            allSockets[i].socket.send(parsedMessage.payload.message);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Failed to parse message", error);
+    }
+  });
+
+  socket.on("close", () => {
+    allSockets = allSockets.filter((user) => user.socket !== socket);
+  });
+});
+  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = require("ws");
-const myWebSocketSer = new ws_1.WebSocketServer({ port: 8000 }); // created  a ws server
-let userCount = 0;
-// global allSocket array for  => when a new socket/client is connected it gets push to this array and we have all the client track at one place.
-let allSocket = [];
+const myWebSocketSer = new ws_1.WebSocketServer({ port: 8000 });
+let allSockets = [];
 myWebSocketSer.on("connection", (socket) => {
-    allSocket.push(socket);
-    userCount = userCount + 1;
-    console.log("User connected Succesufully #" + userCount);
-    // now we need a handler like when we reccivee a message from a client we will transfer it accordingly.
-    // also this is how server can reccive a message from a client.
+    console.log("Client connection is established successfully");
     socket.on("message", (msg) => {
-        console.log("message reccived : " + msg.toString());
-        // so in this way when client send us a msg the server reccives it and prints it on a  console for my understanding.
-        /* ****************************** */
-        // now if we want to send some message from server to client we use socket.send in this case. -> in this we send the message that we have already reccived from a client.
-        /*  setTimeout(() => {
-          socket.send(msg.toString() + " : sent from the  server ");
-        }, 2000); */
-        // okk, now in above ex we have send response to the client as it is, if we have to send response to all the client connectted to the same wss then we need to :
-        for (let i = 0; i < allSocket.length; i++) {
-            const s = allSocket[i];
-            s.send(msg.toString() + " : sent from the  server ");
+        try {
+            const parsedMessage = JSON.parse(msg);
+            if (parsedMessage.type === "join") {
+                // Corrected the type comparison
+                console.log("User joined room successfully: " + parsedMessage.payload.roomId);
+                allSockets.push({
+                    socket,
+                    room: parsedMessage.payload.roomId,
+                });
+            }
+            else if (parsedMessage.type === "chat") {
+                console.log("User wants to chat .....");
+                let currentUserRoom = null;
+                for (let i = 0; i < allSockets.length; i++) {
+                    if (allSockets[i].socket === socket) {
+                        currentUserRoom = allSockets[i].room;
+                        break; // Exit loop once the room is found
+                    }
+                }
+                if (currentUserRoom) {
+                    // Check if the user is in a room
+                    for (let i = 0; i < allSockets.length; i++) {
+                        if (allSockets[i].room === currentUserRoom) {
+                            allSockets[i].socket.send(parsedMessage.payload.message);
+                        }
+                    }
+                }
+                else {
+                    console.error("User is not in any room");
+                }
+            }
+        }
+        catch (error) {
+            console.error("Failed to parse message", error);
         }
     });
+    socket.on("close", () => {
+        allSockets = allSockets.filter((user) => user.socket !== socket);
+    });
 });
-//   \|/
-// So my hopescotch is not working right now , next time when you sit for lec connect hopescotch and cross check the code like diff clients are connected to one server or not and the message is seen by both the clients at place, and after that just moove forward and try to code a client side code for the application. Timeline : 39.31 .
