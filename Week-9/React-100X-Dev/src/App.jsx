@@ -21,8 +21,8 @@ const Counter = () => {
       <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );
-};
- */
+}; */
+ 
 
 // notifications count code for understanding re-renders
 
