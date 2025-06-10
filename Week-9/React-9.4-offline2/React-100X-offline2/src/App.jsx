@@ -1,3 +1,7 @@
+// Week 9.4 : React from basics Offline lecture - 2.
+
+// Children props
+
 import React from "react";
 
 const Card = ({ children }) => {
@@ -19,23 +23,18 @@ const Card = ({ children }) => {
 const App = () => {
   return (
     <div>
-      {/*        wrap everything under the card wrapper
-       */}{" "}
       <Card>
         <h2>Card Title</h2>
         <p>This is some content inside the card.</p>
-        <p>this is 1st card</p>
       </Card>
       <Card>
         <h2>Another Card</h2>
         <p>This card has different content!</p>
-      </Card>
-      <Card>
-        <h2>Yet Another Card</h2>
-        <p>This card has even more content.</p>
       </Card>
     </div>
   );
 };
 
 export default App;
+
+/* ****************************************************************************************** */
