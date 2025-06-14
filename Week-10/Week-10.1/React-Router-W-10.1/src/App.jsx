@@ -71,9 +71,7 @@ function Signup() {
   );
 }
 
-export default App;
-
- */
+export default App; */
 
 /* **************************************************************************************** */
 
@@ -119,7 +117,7 @@ export default App; */
 // Second use case
 // UseRef - also it is a good raw middlware between the two like raw variable and the usestate.
 
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 
 function App() {
   const [timer, setTimer] = useState(0);
@@ -143,4 +141,133 @@ function App() {
   );
 }
 
+export default App; */
+
+/* ************************************************************************************************************************************* */
+
+// Week 10.1 : SPA's , React Router ETC. ( Revised June 2025 )
+
+/* import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Class11 } from "./pages/Class11";
+import { Class12 } from "./pages/Class12";
+import { NoPageFound } from "./pages/NoPageFound";
+import Layout from "./pages/Layout";
+
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          // This layout component has evrything like header , mid section where
+          all the section will rendered and footer.
+          <Route path="/" element={<Layout />}>
+            // Defining route names with the component it needs to render after
+            clicking on this route.
+            <Route
+              path="/neet/online-coaching-class-11"
+              element={<Class11 />}
+            />
+            <Route
+              path="/neet/online-coaching-class-12"
+              element={<Class12 />}
+            />
+            <Route path="*" element={<NoPageFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+export default App; */
+
+/*****************************************************************************************************************************************/
+
+// Layout's ( Jargon in NextJs)
+// cleared with the above example.
+
+/*****************************************************************************************************************************************/
+
+// Allen website : Assignment.
+
+/*****************************************************************************************************************************************/
+
+// useRef :
+
+// 1) Focusing on any input element  after clicking btn.
+
+/* import React, { useRef } from "react";
+
+const App = () => {
+  //    const focus = () => {
+  //   // naive approach - not so good so use useRef
+  //   document.getElementById("one").focus();
+  // };
+
+  const inputRef = useRef();
+
+  const focus = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <>
+      {" "}
+      <div style={{ backgroundColor: "pink", height: "100vh" }}>
+        <h1>Understanding useRef Hook</h1>
+        <div
+          style={{
+            display: "flex",
+            padding: "20px",
+            margin: "20px",
+            gap: 10,
+            backgroundColor: "skyblue",
+          }}
+        >
+          <h3>Name </h3>
+          <input ref={inputRef} type="text" id="one" placeholder="Name" />
+
+          <h3>Password </h3>
+
+          <input type="text" id="two" placeholder="Password" />
+          <button onClick={focus}>ClickMe</button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default App; */
+
+// 2) Clock with start and stop functionality
+
+import React, { useState } from "react";
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  let liveTimer = 0; // bad approach decl raw var.
+
+  const startcount = () => {
+    let liveTimer = setInterval(() => {
+      setCount((c) => c + 1);
+    }, 2000);
+  };
+
+  const stopCount = () => {
+    clearInterval(liveTimer);
+  };
+
+  return (
+    <div>
+      <h1>Timer</h1>
+      <h2>current Count : {count}</h2>
+      <button onClick={startcount}>Start Timer</button>
+      <button onClick={stopCount}>Stop Timer</button>
+    </div>
+  );
+};
+
 export default App;
+
+// have to start from a good approach tommorow - sun 15th june 2025.
