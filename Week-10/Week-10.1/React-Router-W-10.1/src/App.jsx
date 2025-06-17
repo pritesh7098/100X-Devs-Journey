@@ -242,20 +242,22 @@ export default App; */
 
 // 2) Clock with start and stop functionality
 
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 
 const App = () => {
   const [count, setCount] = useState(0);
-  let liveTimer = 0; // bad approach decl raw var.
+  //let liveTimer = 0; // bad approach decl raw var.
+  const [timer, setTimer] = useState(0); // good approach for now atleast
 
   const startcount = () => {
     let liveTimer = setInterval(() => {
       setCount((c) => c + 1);
-    }, 2000);
+    }, 1000);
+    setTimer(liveTimer);
   };
 
   const stopCount = () => {
-    clearInterval(liveTimer);
+    clearInterval(timer);
   };
 
   return (
@@ -268,6 +270,38 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; */
 
-// have to start from a good approach tommorow - sun 15th june 2025.
+// Remember the lesser the rerendering is the app is that optimal.
+// so in that case now we have to use useRef.
+
+/* import React, { useRef, useState } from "react";
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const timer = useRef(); // use Ref hook to avoid unnecessary rerenders.
+
+  const startcount = () => {
+    let liveTimer = setInterval(() => {
+      setCount((c) => c + 1);
+    }, 1000);
+    timer.current = liveTimer;
+  };
+
+  const stopCount = () => {
+    clearInterval(timer.current);
+  };
+
+  return (
+    <div>
+      <h1>Timer</h1>
+      <h2>current Count : {count}</h2>
+      <button onClick={startcount}>Start Timer</button>
+      <button onClick={stopCount}>Stop Timer</button>
+    </div>
+  );
+};
+
+export default App; */
+
+/*****************************************************************************************************************************************/
