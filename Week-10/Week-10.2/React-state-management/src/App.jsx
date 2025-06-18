@@ -45,7 +45,7 @@ export default App; */
 
 // using styles and comments to revise it again.
 
-import { useState } from "react";
+/*import { useState } from "react";
 
 // Main App component
 function App() {
@@ -66,9 +66,9 @@ const LightBulb = () => {
 
   return (
     <>
-      {/* Display the current state of the bulb */}
+      {/* Display the current state of the bulb 
       <BulbState bulbon={bulbon} />
-      {/* Button to toggle the bulb's state */}
+      {/* Button to toggle the bulb's state 
       <ToggleBulbState bulbon={bulbon} setBulbOn={setBulbOn} />
     </>
   );
@@ -98,7 +98,7 @@ const ToggleBulbState = ({ bulbon, setBulbOn }) => {
 };
 
 // Internal CSS styles
-const styles = {
+ const styles = {
   appContainer: {
     backgroundColor: "black",
     color: "white",
@@ -125,9 +125,58 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
   },
-};
+}; 
 
-export default App;
+export default App;*/
 
 /* ******************************************************************************************************************** */
 
+// Props and props Drilling in React :
+
+// i have understood already that what is prop and what is prop drilling and to avoid it next we are gonna use context api.
+
+/* ********************************************************************************************************************* */
+
+// Context API :
+// Ugly code as it has prop drilling.
+
+/* import React, { useEffect, useState } from "react";
+
+// App Component
+const App = () => {
+  return (
+    <div>
+      <Parent />
+    </div>
+  );
+};
+
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  function Value({ count }) {
+    return <p>Count: {count}</p>;
+  }
+  function Incrase({ count, setCount }) {
+    return <button onClick={() => setCount(count + 1)}>Increase</button>;
+  }
+
+  function Decrease({ count, setCount }) {
+    return <button onClick={() => setCount(count - 1)}>Decrease</button>;
+  }
+
+  return (
+    <>
+      <Value count={count} setCount={setCount} />
+
+      <Incrase count={count} setCount={setCount} />
+      <Decrease count={count} setCount={setCount} />
+    </>
+  );
+} 
+
+export default App;*/
+
+// Better way to do is use Context API :
+
+// i'll cont from contextAPI practical implementaion with proper code and then move fwd.( 39.22 )
