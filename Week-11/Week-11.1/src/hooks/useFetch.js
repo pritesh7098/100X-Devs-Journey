@@ -1,5 +1,7 @@
 // this is a custom hook approach
 
+// import { useState } from "react";
+
 /*import { React, useState, useEffect } from "react";
 export function useFetchTodo() {
   const [post, setPosts] = useState(null);
@@ -22,7 +24,8 @@ export function useFetchTodo() {
 // useFetch hook
 
 // useFetch.js
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
+import { useState } from 'react';
 
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -51,4 +54,30 @@ export const useFetch = (url) => {
   return { data, loading, error };
 };
 
-export default useFetch;
+export default useFetch; */
+
+/* *********************************************** */
+
+// useFetch Revised :
+
+/* import { useState, useEffect } from "react";
+
+export const useFetch = () => {
+  const [posts, setPosts] = useState({});
+
+  async function fetchPosts() {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    const jsonData = await res.json();
+    setPosts(jsonData);
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  return {
+    posts: posts,
+    setPosts: setPosts,
+  };
+};
+ */
